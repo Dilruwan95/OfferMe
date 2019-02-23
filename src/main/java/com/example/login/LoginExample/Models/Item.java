@@ -41,6 +41,26 @@ public class Item {
 
     private boolean accpet;
 
+    private String supplierName;
+
+    public String getSupplierName() {
+        return supplierName;
+    }
+
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    private String location;
+
     public Long getSupplyId() {
         return SupplyId;
     }
@@ -55,7 +75,7 @@ public class Item {
 
     }
 
-    public Item(Long id, float discount, Date startDate, Date endDate, String photoUrl, String name, int oldPrice, int newPrice, Long itemCode, float rate, int categoryId, boolean accpet,Long SupplyId) {
+    public Item(Long id, float discount, Date startDate, Date endDate, String photoUrl, String name, int oldPrice, int newPrice, Long itemCode, float rate, int categoryId, boolean accpet,Long SupplyId , String location) {
         this.id = id;
         this.name = name;
         this.oldPrice = oldPrice;
@@ -69,6 +89,7 @@ public class Item {
         this.categoryId=categoryId;
         this.accpet=accpet;
         this.SupplyId=SupplyId;
+        this.location=location;
     }
 
     public Long getId() {

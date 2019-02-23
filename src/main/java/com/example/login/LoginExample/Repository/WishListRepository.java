@@ -11,6 +11,10 @@ import java.util.List;
 
 @Repository
 public interface WishListRepository extends JpaRepository<WishList, Long> {
-//    @Query(value = "SELECT * FROM `wish_lists` WHERE id IN (SELECT item_id FROM `wish_lists` WHERE user_id = :userId ) ", nativeQuery = true)
-//    List<WishList> getUserWishList(@Param("userId")Long userId);
+
+    @Query(value = "DELETE FROM WishList WHERE item_id = :itemId and user_id = :userId", nativeQuery = true)
+    String deleteItem(@Param("itemId") Long itemId, @Param("userId") Long userId);
+
+    @Query(value = "SELECT * FROM `wish_lists` WHERE item_id= :itemId AND user_id =:userId ", nativeQuery = true)
+    WishList getWishListId(@Param("itemId") Long itemId, @Param("userId") Long userId);
 }

@@ -28,10 +28,10 @@ public class SubscribeController {
         return "Saved";
     }
 
+
     @GetMapping("/subscribeItem/{userId}")
     public List<Item> getSubscribeItems(@PathVariable Long userId){
         return itemRepository.getSubscribeItems(userId);
     }
-
 
 }

@@ -54,4 +54,22 @@ public class OrderController {
         return "delete order";
     }
 
+    @GetMapping("/DeleteOrder/{itemId}/{userId}")
+    public String  deleteOrderItems(@PathVariable Long itemId, @PathVariable Long userId){
+        Order ab = orderRepository.getOrderId(itemId, userId);
+        orderRepository.deleteById(ab.getId());
+        return "successfully deleted";
+
+    }
+
+    @GetMapping("/findOrder/{itemId}/{userId}")
+    public Boolean findOredr(@PathVariable Long itemId, @PathVariable Long userId){
+        Order ab = orderRepository.getOrderId(itemId, userId);
+        if(ab!=null) {
+            return true;
+        }
+        return false;
+
+    }
+
 }

@@ -40,10 +40,24 @@ public class WishListController {
         return itemRepository.getUserWishList(userId);
     }
 
-    @DeleteMapping("/DeleteWishList/{id}")
-    public String deleteWishListItems(@PathVariable Long id){
-        wishListRepository.deleteById(id);
-        return "delete wishList";
+
+    @GetMapping("/DeleteWishList/{itemId}/{userId}")
+    public String  deleteWishListItems(@PathVariable Long itemId, @PathVariable Long userId){
+        WishList ab = wishListRepository.getWishListId(itemId, userId);
+        wishListRepository.deleteById(ab.getId());
+        return "successfully deleted";
+
     }
+
+    @GetMapping("/findWishList/{itemId}/{userId}")
+    public Boolean findWishList(@PathVariable Long itemId, @PathVariable Long userId){
+        WishList ab = wishListRepository.getWishListId(itemId, userId);
+        if(ab!=null) {
+            return true;
+        }
+        return false;
+
+    }
+
 
 }

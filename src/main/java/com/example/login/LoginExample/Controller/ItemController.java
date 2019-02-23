@@ -21,21 +21,28 @@ public class ItemController {
     private ItemRepository itemRepository;
 
     @GetMapping("/advertisment/{id}")
-    public Optional<Item> getItem(@PathVariable(value = "id") Long id){
+    public Optional<Item> getItem(@PathVariable(value = "id") Long id) {
         return itemRepository.findById(id);
     }
 
     @PostMapping("/addAdvertisment")
-    public String addAdvertisement (@Valid @RequestBody Item item){
+    public String addAdvertisement(@Valid @RequestBody Item item) {
         itemRepository.save(item);
         return "Saved";
     }
 
-    @PutMapping("addAdvertisment/{id}")
-    public Item updateitem(@PathVariable(value ="id") Long itemId,
-                           @Valid @RequestBody ItemDetails itemDetails){
+
+    @PostMapping("/addspeclAdvertisment")
+    public String addspeclAdvertisment(@Valid @RequestBody Item item) {
+        itemRepository.save(item);
+        return "Saved";
+    }
+
+    @PutMapping("addAdvertisment /{id}")
+    public Item updateitem(@PathVariable(value = "id") Long itemId,
+                           @Valid @RequestBody ItemDetails itemDetails) {
         Item item = itemRepository.findById(itemId)
-                .orElseThrow(()-> new ResourceNotFoundException("Item", "id", itemId));
+                .orElseThrow(() -> new ResourceNotFoundException("Item", "id", itemId));
 
         item.setName(itemDetails.getName());
         item.setOldPrice(itemDetails.getOldPrice());
@@ -54,8 +61,8 @@ public class ItemController {
     }
 
     @PutMapping("/approveItem/{id}")
-    public Item approveItem(@PathVariable (value="id") Long id,
-                           @Valid @RequestBody ApproveItem approveItem){
+    public Item approveItem(@PathVariable(value = "id") Long id,
+                            @Valid @RequestBody ApproveItem approveItem) {
         Item item = itemRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Item", "id", id));
 
@@ -67,16 +74,23 @@ public class ItemController {
     }
 
     @DeleteMapping("/DeleteItem/{id}")
-    public String deleteItem(@PathVariable Long id){
+    public String deleteItem(@PathVariable Long id) {
         itemRepository.deleteById(id);
         return "delete item";
     }
 
     @GetMapping("/user/{id}")
-    public Iterable<Item> getItemBySupplierId(@PathVariable (value="id") Long id){
+    public Iterable<Item> getItemBySupplierId(@PathVariable(value = "id") Long id) {
         return itemRepository.getAllItemBySupplierId(id);
     }
 
+    @DeleteMapping("/deleteExpItem/{itemId}")
+    public String deleteExpItem(@PathVariable Long itemId){
+        itemRepository.deleteExpItem(itemId);
+        return  "delete Item";
+    }
 
 
 }
+
+
